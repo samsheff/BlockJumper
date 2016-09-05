@@ -13,7 +13,7 @@ public class PedestalManager : MonoBehaviour {
 
 	public int NumberOfPedestals = 10;
 
-	public GameObject[] Pedestals;
+	public ArrayList Pedestals;
 
 	// Use this for initialization
 	void Start () {
@@ -26,12 +26,10 @@ public class PedestalManager : MonoBehaviour {
 	}
 
 	void GeneratePedestals() {
-		ArrayList pedestalList = new ArrayList();
+		ArrayList Pedestals = new ArrayList();
 		for (int i = 1; i < NumberOfPedestals; i++) {
-			pedestalList.Add((GameObject)Instantiate (Pedestal, GeneratePedestalPosition(i), Quaternion.identity));
+			Pedestals.Add((GameObject)Instantiate (Pedestal, GeneratePedestalPosition(i), Quaternion.identity));
 		}
-
-		Pedestals = (GameObject[])pedestalList.ToArray ();
 	}
 
 	Vector3 GeneratePedestalPosition(int pedestalIndex) {

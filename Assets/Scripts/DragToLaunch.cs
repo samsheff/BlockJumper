@@ -9,6 +9,7 @@ public class DragToLaunch : MonoBehaviour {
 	public Vector3 MinForce;
 
 	public Rigidbody PlayerRigidbody;
+	public PlayerManager PlayerManagerScript;
 
 	private Vector3 dragStartPosition;
 	private Vector3 dragEndPosition;
@@ -16,6 +17,7 @@ public class DragToLaunch : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		PlayerRigidbody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
+		PlayerManagerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
 		Input.simulateMouseWithTouches = true;
 	}
 
@@ -30,7 +32,7 @@ public class DragToLaunch : MonoBehaviour {
 			dragEndPosition = Input.mousePosition;
 
 			Vector3 dragDifference = dragStartPosition - dragEndPosition;
-			Vector3 thrustVector = baseThrust * dragDifference.normalized;
+			Vector3 thrustVector = baseThrust * (dragDifference.normalized + Vector3.one);
 
 			print (thrustVector);
 			print (dragDifference);
@@ -38,8 +40,9 @@ public class DragToLaunch : MonoBehaviour {
 			if (MinForce.x > thrustVector.x || MinForce.y > thrustVector.y) {
 				return;
 			} else {
-				PlayerRigidbody.AddForce(thrustVector);
-				iTweenEvent.GetEvent (Camera.main.gameObject, "MoveToPlayer").Start();
+				if (PlayerManagerScript.InAir == false) {
+					PlayerRigidbody.AddForce(thrustVector);
+				}
 			}
 		}
 	}
