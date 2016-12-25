@@ -41,8 +41,8 @@ public class DragToLaunch : MonoBehaviour {
 				return;
 			} else {
 				if (PlayerManagerScript.InAir == false) {
-					PlayerManagerScript.Launches++;
-					PlayerRigidbody.AddForce(thrustVector);
+					PlayerManagerScript.Launched ();
+					PlayerRigidbody.AddForce (thrustVector);
 				}
 			}
 		}

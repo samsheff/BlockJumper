@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour {
 
 	public bool InAir = false;
-	public int Launches = 0;
+
+	public Text ScoreText;
+	public string ScoreTextBaseString = "Score: ";
+	public int Score = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +18,11 @@ public class PlayerManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void Launched() {
+		Score++;
+		ScoreText.text = ScoreTextBaseString + Score.ToString ();
 	}
 
 	public void SetOnGround() {
