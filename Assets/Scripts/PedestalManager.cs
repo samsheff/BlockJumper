@@ -28,7 +28,10 @@ public class PedestalManager : MonoBehaviour {
 	void GeneratePedestals() {
 		ArrayList Pedestals = new ArrayList();
 		for (int i = 1; i < NumberOfPedestals; i++) {
-			Pedestals.Add((GameObject)Instantiate (Pedestal, GeneratePedestalPosition(i), Quaternion.identity));
+			GameObject pedestal = (GameObject)Instantiate (Pedestal, GeneratePedestalPosition(i), Quaternion.identity);
+			pedestal.GetComponent<Pedestal>().PedestalNumber = i;
+
+			Pedestals.Add(pedestal);
 		}
 	}
 

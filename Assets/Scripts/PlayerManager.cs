@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerManager : MonoBehaviour {
 
 	public bool InAir = false;
+	public int Launches = 0;
 
 	// Use this for initialization
 	void Start () {
